@@ -12,6 +12,7 @@ import { useEffect, useMemo, useRef, useState } from "react"
 import ProductPrice from "../product-price"
 import MobileActions from "./mobile-actions"
 import { useRouter } from "next/navigation"
+import { showToast } from "@modules/common/components/toast"
 
 type ProductActionsProps = {
   product: HttpTypes.StoreProduct
@@ -133,6 +134,7 @@ export default function ProductActions({
     })
 
     setIsAdding(false)
+    showToast("Produkt pridaný do košíka")
   }
 
   return (

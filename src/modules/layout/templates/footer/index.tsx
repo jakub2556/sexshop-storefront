@@ -39,11 +39,13 @@ export default async function Footer() {
               </div>
             )}
             <div className="flex flex-col gap-y-3">
-              <span className="font-semibold" style={{ color: "var(--text-primary)" }}>Informácie</span>
+              <span className="font-semibold" style={{ color: "var(--text-primary)" }}>Zákaznícky servis</span>
               <ul className="grid grid-cols-1 gap-y-2">
-                <li><LocalizedClientLink className="hover:text-rose-400 transition-colors" style={{ color: "var(--text-secondary)" }} href="/store">Obchod</LocalizedClientLink></li>
-                <li><LocalizedClientLink className="hover:text-rose-400 transition-colors" style={{ color: "var(--text-secondary)" }} href="/account">Môj účet</LocalizedClientLink></li>
-                <li><LocalizedClientLink className="hover:text-rose-400 transition-colors" style={{ color: "var(--text-secondary)" }} href="/cart">Košík</LocalizedClientLink></li>
+                <li><LocalizedClientLink className="hover:text-rose-400 transition-colors" style={{ color: "var(--text-secondary)" }} href="/info/about">O nás</LocalizedClientLink></li>
+                <li><LocalizedClientLink className="hover:text-rose-400 transition-colors" style={{ color: "var(--text-secondary)" }} href="/info/contact">Kontakt</LocalizedClientLink></li>
+                <li><LocalizedClientLink className="hover:text-rose-400 transition-colors" style={{ color: "var(--text-secondary)" }} href="/info/terms">Obchodné podmienky</LocalizedClientLink></li>
+                <li><LocalizedClientLink className="hover:text-rose-400 transition-colors" style={{ color: "var(--text-secondary)" }} href="/info/privacy">Ochrana osobných údajov</LocalizedClientLink></li>
+                <li><LocalizedClientLink className="hover:text-rose-400 transition-colors" style={{ color: "var(--text-secondary)" }} href="/info/returns">Reklamácie a vrátenie</LocalizedClientLink></li>
               </ul>
             </div>
           </div>

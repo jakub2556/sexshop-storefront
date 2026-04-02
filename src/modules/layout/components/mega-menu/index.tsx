@@ -188,7 +188,7 @@ export default function MegaMenu() {
           {/* Right panel: subcategories in columns */}
           {children.length > 0 && (
             <div
-              className="py-3 px-5 min-w-[340px]"
+              className="py-3 px-5 w-[400px] max-h-[70vh] overflow-y-auto no-scrollbar"
               style={{
                 background: "var(--bg-card)",
                 animation: "megaMenuFadeIn 150ms ease",
@@ -200,24 +200,14 @@ export default function MegaMenu() {
               >
                 {activeCategory?.name}
               </p>
-              <div
-                className="grid gap-x-6 gap-y-1"
-                style={{
-                  gridTemplateColumns:
-                    children.length > 6
-                      ? "repeat(3, 1fr)"
-                      : children.length > 3
-                      ? "repeat(2, 1fr)"
-                      : "1fr",
-                }}
-              >
+              <div className="grid grid-cols-2 gap-x-4 gap-y-0.5">
                 {children.map((sub) => (
                   <LocalizedClientLink
                     key={sub.id}
                     href={`/categories/${sub.handle}`}
                     onClick={() => setOpen(false)}
-                    className="block px-1 py-1.5 text-sm rounded transition-colors hover:text-rose-400"
-                    style={{ color: "var(--text-primary)" }}
+                    className="block px-1 py-1.5 text-sm rounded transition-colors hover:text-rose-400 leading-tight"
+                    style={{ color: "var(--text-primary)", minWidth: 0, wordBreak: "break-word" }}
                   >
                     {sub.name}
                   </LocalizedClientLink>

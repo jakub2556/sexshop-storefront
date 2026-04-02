@@ -17,6 +17,7 @@ import RecentlyViewedTracker from "@modules/products/components/recently-viewed/
 import RecentlyViewed from "@modules/products/components/recently-viewed"
 import WishlistButton from "@modules/products/components/wishlist-button"
 import CompareButton from "@modules/products/components/compare-button"
+import ProductBadges from "@modules/products/components/product-badges"
 
 type ProductTemplateProps = {
   product: HttpTypes.StoreProduct
@@ -77,6 +78,9 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
               <ProductActionsWrapper id={product.id} region={region} />
             </Suspense>
           </div>
+
+          {/* Product attributes */}
+          <ProductBadges product={product} />
 
           <div className="mt-4 flex flex-wrap gap-2">
             <span className="text-xs px-3 py-1.5 rounded-full" style={{ background: "var(--accent-soft)", color: "var(--text-secondary)" }}>
