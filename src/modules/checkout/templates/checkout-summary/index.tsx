@@ -8,13 +8,13 @@ import Divider from "@modules/common/components/divider"
 const CheckoutSummary = ({ cart }: { cart: any }) => {
   return (
     <div className="sticky top-0 flex flex-col-reverse small:flex-col gap-y-8 py-8 small:py-0 ">
-      <div className="w-full bg-zinc-900 flex flex-col">
+      <div className="w-full flex flex-col rounded-2xl p-6" style={{ background: "var(--bg-card)", border: "1px solid var(--border)" }}>
         <Divider className="my-6 small:hidden" />
         <Heading
           level="h2"
           className="flex flex-row text-3xl-regular items-baseline"
         >
-          In your Cart
+          Vo vašom košíku
         </Heading>
         <Divider className="my-6" />
         <CartTotals totals={cart} />

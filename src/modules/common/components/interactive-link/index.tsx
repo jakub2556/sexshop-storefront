@@ -21,9 +21,9 @@ const InteractiveLink = ({
       onClick={onClick}
       {...props}
     >
-      <Text className="text-brand-400">{children}</Text>
+      <Text className="text-rose-400">{children}</Text>
       <ArrowUpRightMini
-        className="group-hover:rotate-45 ease-in-out duration-150 text-brand-400"
+        className="group-hover:rotate-45 ease-in-out duration-150 text-rose-400"
       />
     </LocalizedClientLink>
   )

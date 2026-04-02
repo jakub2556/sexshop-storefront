@@ -1,8 +1,8 @@
 import { listProducts } from "@lib/data/products"
 import { HttpTypes } from "@medusajs/types"
-
 import InteractiveLink from "@modules/common/components/interactive-link"
 import ProductPreview from "@modules/products/components/product-preview"
+import ProductSlider from "@modules/common/components/product-slider"
 
 export default async function ProductRail({
   collection,
@@ -21,26 +21,25 @@ export default async function ProductRail({
     },
   })
 
-  if (!pricedProducts) {
+  if (!pricedProducts || pricedProducts.length === 0) {
     return null
   }
 
   return (
-    <div className="content-container py-12 small:py-20">
-      <div className="flex justify-between items-center mb-8">
-        <h2 className="font-display text-2xl small:text-3xl text-white">{collection.title}</h2>
+    <div className="content-container py-10 small:py-16">
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="section-heading">{collection.title}</h2>
         <InteractiveLink href={`/collections/${collection.handle}`}>
-          Zobrazit vsetky
+          Zobraziť všetky
         </InteractiveLink>
       </div>
-      <ul className="grid grid-cols-2 small:grid-cols-3 medium:grid-cols-4 gap-4 small:gap-6">
-        {pricedProducts &&
-          pricedProducts.map((product) => (
-            <li key={product.id}>
-              <ProductPreview product={product} region={region} isFeatured />
-            </li>
-          ))}
-      </ul>
+      <ProductSlider>
+        {pricedProducts.map((product) => (
+          <div key={product.id} className="flex-shrink-0 w-[180px] small:w-[220px] ">
+            <ProductPreview product={product} region={region} isFeatured />
+          </div>
+        ))}
+      </ProductSlider>
     </div>
   )
 }

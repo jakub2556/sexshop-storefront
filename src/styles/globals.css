@@ -1,19 +1,81 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
 @layer base {
+  :root {
+    --bg-primary: #13111C;
+    --bg-card: #1C1A27;
+    --bg-elevated: #252336;
+    --border: #2E2B3F;
+    --text-primary: #F0EEF6;
+    --text-secondary: #9B97B0;
+    --accent: #E11D48;
+    --accent-soft: rgba(225,29,72,0.12);
+
+    /* Override Medusa UI variables */
+    --ui-bg-base: #13111C;
+    --ui-bg-subtle: #1C1A27;
+    --ui-bg-field: #252336;
+    --ui-bg-component: #1C1A27;
+    --ui-bg-switch-off: #2E2B3F;
+    --ui-bg-interactive: #E11D48;
+    --ui-bg-overlay: rgba(0,0,0,0.6);
+    --ui-bg-disabled: #252336;
+    --ui-bg-highlight: rgba(225,29,72,0.12);
+
+    --ui-fg-base: #F0EEF6;
+    --ui-fg-subtle: #9B97B0;
+    --ui-fg-muted: #6B6780;
+    --ui-fg-disabled: #4A4660;
+    --ui-fg-on-color: #ffffff;
+    --ui-fg-on-inverted: #13111C;
+    --ui-fg-interactive: #E11D48;
+    --ui-fg-interactive-hover: #F43F5E;
+    --ui-fg-error: #F43F5E;
+
+    --ui-border-base: #2E2B3F;
+    --ui-border-strong: #3D3A52;
+    --ui-border-loud: #4A4660;
+    --ui-border-interactive: #E11D48;
+    --ui-border-error: #F43F5E;
+    --ui-border-danger: #F43F5E;
+
+    --ui-button-inverted: #F0EEF6;
+    --ui-button-inverted-hover: #ffffff;
+    --ui-button-inverted-pressed: #9B97B0;
+    --ui-button-neutral: #252336;
+    --ui-button-neutral-hover: #2E2B3F;
+    --ui-button-neutral-pressed: #3D3A52;
+    --ui-button-danger: #E11D48;
+    --ui-button-danger-hover: #BE123C;
+    --ui-button-danger-pressed: #9F1239;
+
+    --ui-tag-neutral-bg: #252336;
+    --ui-tag-neutral-text: #9B97B0;
+    --ui-tag-neutral-icon: #6B6780;
+    --ui-tag-neutral-border: #2E2B3F;
+
+    --ui-code-bg-base: #1C1A27;
+    --ui-code-bg-subtle: #252336;
+    --ui-code-border: #2E2B3F;
+    --ui-code-fg-base: #F0EEF6;
+    --ui-code-fg-subtle: #9B97B0;
+    --ui-code-fg-muted: #6B6780;
+  }
+
   body {
-    @apply bg-zinc-950 text-zinc-100;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Plus Jakarta Sans', sans-serif;
   }
 
   ::selection {
-    @apply bg-brand/30 text-white;
+    @apply bg-rose-500/30 text-white;
   }
 
-  /* Dark autofill */
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
   input:-webkit-autofill:focus,
@@ -23,35 +85,22 @@
   select:-webkit-autofill,
   select:-webkit-autofill:hover,
   select:-webkit-autofill:focus {
-    border: 1px solid #27272a;
-    -webkit-text-fill-color: #fafafa;
-    -webkit-box-shadow: 0 0 0px 1000px #18181b inset;
+    border: 1px solid var(--border);
+    -webkit-text-fill-color: var(--text-primary);
+    -webkit-box-shadow: 0 0 0px 1000px var(--bg-card) inset;
     transition: background-color 5000s ease-in-out 0s;
   }
 }
 
 @layer utilities {
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-
-  .no-scrollbar::-webkit-scrollbar-track {
-    background-color: transparent;
-  }
-
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
   input:focus ~ label,
   input:not(:placeholder-shown) ~ label {
     @apply -translate-y-2 text-xsmall-regular;
   }
-
-  input:focus ~ label {
-    @apply left-0;
-  }
+  input:focus ~ label { @apply left-0; }
 
   input[type="search"]::-webkit-search-decoration,
   input[type="search"]::-webkit-search-cancel-button,
@@ -59,6 +108,17 @@
   input[type="search"]::-webkit-search-results-decoration {
     -webkit-appearance: none;
   }
+
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-delay-1 { animation-delay: 0.1s; opacity: 0; }
+  .animate-delay-2 { animation-delay: 0.2s; opacity: 0; }
+  .animate-delay-3 { animation-delay: 0.3s; opacity: 0; }
 }
 
 @layer components {
@@ -66,82 +126,213 @@
     @apply max-w-[1440px] w-full mx-auto px-6;
   }
 
-  .contrast-btn {
-    @apply px-4 py-2 border border-brand rounded-full hover:bg-brand hover:text-white transition-colors duration-200 ease-in;
+  .btn-primary {
+    @apply bg-rose-600 text-white font-semibold px-8 py-3.5 rounded-xl
+    hover:bg-rose-500 transition-all duration-300 shadow-lg shadow-rose-600/20
+    hover:shadow-rose-500/30 hover:scale-[1.02] active:scale-[0.98] text-sm;
   }
 
-  /* Brand gradient button */
-  .btn-brand {
-    @apply bg-gradient-to-r from-brand to-pink-500 text-white font-semibold px-8 py-3 rounded-lg
-    hover:from-brand-dark hover:to-brand transition-all duration-300 shadow-lg shadow-brand/25
-    hover:shadow-brand/40 hover:scale-[1.02] active:scale-[0.98];
+  .btn-outline {
+    @apply px-8 py-3.5 rounded-xl border border-[var(--border)] text-[var(--text-secondary)] font-semibold
+    hover:border-rose-500/50 hover:text-white hover:bg-rose-500/5 transition-all duration-300 text-sm;
   }
 
-  /* Dark card */
+  /* Glassmorphism card */
   .dark-card {
-    @apply bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden
-    hover:border-zinc-700 transition-all duration-300;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    @apply rounded-2xl overflow-hidden transition-all duration-300
+    hover:border-rose-500/20 hover:shadow-xl hover:shadow-rose-500/5;
   }
 
-  /* Product card hover zoom */
   .product-card-img {
-    @apply transition-transform duration-500 ease-out group-hover:scale-105;
+    @apply transition-transform duration-700 ease-out group-hover:scale-105;
   }
 
-  /* Glow effect */
-  .glow-brand {
-    box-shadow: 0 0 20px rgba(225, 29, 72, 0.15);
+  .section-heading {
+    font-family: 'DM Serif Display', serif;
+    @apply text-3xl small:text-4xl;
+    color: var(--text-primary);
   }
 
-  .text-xsmall-regular {
-    @apply text-[10px] leading-4 font-normal;
+  .glass {
+    background: rgba(28, 26, 39, 0.7);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
   }
 
-  .text-small-regular {
-    @apply text-xs leading-5 font-normal;
-  }
+  .text-xsmall-regular { @apply text-[10px] leading-4 font-normal; }
+  .text-small-regular { @apply text-xs leading-5 font-normal; }
+  .text-small-semi { @apply text-xs leading-5 font-semibold; }
+  .text-base-regular { @apply text-sm leading-6 font-normal; }
+  .text-base-semi { @apply text-sm leading-6 font-semibold; }
+  .text-large-regular { @apply text-base leading-6 font-normal; }
+  .text-large-semi { @apply text-base leading-6 font-semibold; }
+  .text-xl-regular { @apply text-2xl leading-[36px] font-normal; }
+  .text-xl-semi { @apply text-2xl leading-[36px] font-semibold; }
+  .text-2xl-regular { @apply text-[30px] leading-[48px] font-normal; }
+  .text-2xl-semi { @apply text-[30px] leading-[48px] font-semibold; }
+  .text-3xl-regular { @apply text-[32px] leading-[44px] font-normal; }
+  .text-3xl-semi { @apply text-[32px] leading-[44px] font-semibold; }
 
-  .text-small-semi {
-    @apply text-xs leading-5 font-semibold;
+  .contrast-btn {
+    @apply px-4 py-2 border border-rose-500 rounded-full hover:bg-rose-500 hover:text-white transition-colors duration-200;
   }
+}
 
-  .text-base-regular {
-    @apply text-sm leading-6 font-normal;
-  }
+/* ============================================ */
+/* Global overrides for Medusa UI dark theme    */
+/* ============================================ */
 
-  .text-base-semi {
-    @apply text-sm leading-6 font-semibold;
-  }
+div, section, aside, main, header, footer, form {
+  color: inherit;
+}
 
-  .text-large-regular {
-    @apply text-base leading-6 font-normal;
-  }
+/* Fix Medusa UI background classes */
+[class*="bg-ui-bg-base"],
+[class*="bg-ui-bg-subtle"],
+[class*="bg-white"] {
+  background-color: var(--bg-primary) !important;
+}
 
-  .text-large-semi {
-    @apply text-base leading-6 font-semibold;
-  }
+[class*="bg-ui-bg-base-hover"]:hover {
+  background-color: var(--bg-card) !important;
+}
 
-  .text-xl-regular {
-    @apply text-2xl leading-[36px] font-normal;
-  }
+[class*="bg-ui-bg-subtle"] tr,
+[class*="bg-ui-bg-subtle"] thead {
+  background-color: var(--bg-card) !important;
+}
 
-  .text-xl-semi {
-    @apply text-2xl leading-[36px] font-semibold;
-  }
+/* Fix Medusa UI border classes */
+[class*="border-ui-border-base"] {
+  border-color: var(--border) !important;
+}
 
-  .text-2xl-regular {
-    @apply text-[30px] leading-[48px] font-normal;
-  }
+/* Fix Medusa UI text classes */
+[class*="text-ui-fg-base"] {
+  color: var(--text-primary) !important;
+}
 
-  .text-2xl-semi {
-    @apply text-[30px] leading-[48px] font-semibold;
-  }
+[class*="text-ui-fg-subtle"],
+[class*="text-ui-fg-muted"] {
+  color: var(--text-secondary) !important;
+}
 
-  .text-3xl-regular {
-    @apply text-[32px] leading-[44px] font-normal;
-  }
+/* Fix Medusa UI tag/badge classes */
+[class*="bg-ui-tag-neutral-bg"] {
+  background-color: var(--bg-elevated) !important;
+}
 
-  .text-3xl-semi {
-    @apply text-[32px] leading-[44px] font-semibold;
-  }
+[class*="border-ui-tag-neutral-border"] {
+  border-color: var(--border) !important;
+}
+
+/* Fix Medusa UI shadow classes */
+[class*="shadow-elevation-card"] {
+  box-shadow: none !important;
+}
+
+/* Fix inputs and form fields */
+input, textarea, select {
+  background-color: var(--bg-elevated) !important;
+  border-color: var(--border) !important;
+  color: var(--text-primary) !important;
+}
+
+input::placeholder, textarea::placeholder {
+  color: var(--text-secondary) !important;
+}
+
+/* ============================================ */
+/* Table styling                                */
+/* ============================================ */
+table {
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+}
+
+thead tr {
+  background: var(--bg-elevated) !important;
+}
+
+th, td {
+  padding: 14px 16px !important;
+  text-align: left;
+}
+
+th {
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--border);
+}
+
+td {
+  border-bottom: 1px solid var(--border);
+  color: var(--text-primary);
+}
+
+/* Fix Medusa UI Container component */
+[data-slot="container"] {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Fix checkout and cart backgrounds */
+[data-testid="cart-container"],
+[data-testid="checkout-container"] {
+  color: var(--text-primary);
+}
+
+/* Fix accordion borders */
+[data-orientation="vertical"] {
+  border-color: var(--border) !important;
+}
+
+/* Fix buttons that might be grey */
+button[data-variant="secondary"],
+button[data-variant="transparent"] {
+  background-color: var(--bg-elevated) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border) !important;
+}
+
+/* Fix dropdown/popover panels */
+[role="listbox"],
+[role="dialog"],
+[data-radix-popper-content-wrapper] {
+  background-color: var(--bg-card) !important;
+  border-color: var(--border) !important;
+}
+
+/* Fix dividers */
+hr, [class*="divider"], [class*="Divider"] {
+  border-color: var(--border) !important;
+}
+
+/* Fix labels */
+label {
+  color: var(--text-secondary) !important;
+}
+
+/* Fix headings in checkout */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
+}
+
+/* Fix links */
+a {
+  color: inherit;
+}
+
+/* Fix cart item rows */
+[data-testid="cart-item"] {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
 }

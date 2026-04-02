@@ -12,13 +12,15 @@ type ProductTabsProps = {
 }
 
 const ProductTabs = ({ product }: ProductTabsProps) => {
+  const hasProductInfo = product.material || product.origin_country || product.type || product.weight || (product.length && product.width && product.height)
+
   const tabs = [
-    {
-      label: "Product Information",
+    ...(hasProductInfo ? [{
+      label: "Informácie o produkte",
       component: <ProductInfoTab product={product} />,
-    },
+    }] : []),
     {
-      label: "Shipping & Returns",
+      label: "Doručenie a vrátenie",
       component: <ShippingInfoTab />,
     },
   ]
@@ -46,32 +48,38 @@ const ProductInfoTab = ({ product }: ProductTabsProps) => {
     <div className="text-small-regular py-8">
       <div className="grid grid-cols-2 gap-x-8">
         <div className="flex flex-col gap-y-4">
-          <div>
-            <span className="font-semibold">Material</span>
-            <p>{product.material ? product.material : "-"}</p>
-          </div>
-          <div>
-            <span className="font-semibold">Country of origin</span>
-            <p>{product.origin_country ? product.origin_country : "-"}</p>
-          </div>
-          <div>
-            <span className="font-semibold">Type</span>
-            <p>{product.type ? product.type.value : "-"}</p>
-          </div>
+          {product.material && (
+            <div>
+              <span className="font-semibold text-neutral-200">Materiál</span>
+              <p className="text-neutral-400">{product.material}</p>
+            </div>
+          )}
+          {product.origin_country && (
+            <div>
+              <span className="font-semibold text-neutral-200">Krajina pôvodu</span>
+              <p className="text-neutral-400">{product.origin_country}</p>
+            </div>
+          )}
+          {product.type && (
+            <div>
+              <span className="font-semibold text-neutral-200">Typ</span>
+              <p className="text-neutral-400">{product.type.value}</p>
+            </div>
+          )}
         </div>
         <div className="flex flex-col gap-y-4">
-          <div>
-            <span className="font-semibold">Weight</span>
-            <p>{product.weight ? `${product.weight} g` : "-"}</p>
-          </div>
-          <div>
-            <span className="font-semibold">Dimensions</span>
-            <p>
-              {product.length && product.width && product.height
-                ? `${product.length}L x ${product.width}W x ${product.height}H`
-                : "-"}
-            </p>
-          </div>
+          {product.weight && (
+            <div>
+              <span className="font-semibold text-neutral-200">Hmotnosť</span>
+              <p className="text-neutral-400">{product.weight} g</p>
+            </div>
+          )}
+          {product.length && product.width && product.height && (
+            <div>
+              <span className="font-semibold text-neutral-200">Rozmery</span>
+              <p className="text-neutral-400">{product.length} x {product.width} x {product.height} cm</p>
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -85,31 +93,27 @@ const ShippingInfoTab = () => {
         <div className="flex items-start gap-x-2">
           <FastDelivery />
           <div>
-            <span className="font-semibold">Fast delivery</span>
-            <p className="max-w-sm">
-              Your package will arrive in 3-5 business days at your pick up
-              location or in the comfort of your home.
+            <span className="font-semibold text-neutral-200">📦 Rýchle doručenie</span>
+            <p className="max-w-sm text-neutral-400">
+              Vašu objednávku odosielame do 24 hodín. Doručenie na Slovensku trvá 1-2 pracovné dni.
             </p>
           </div>
         </div>
         <div className="flex items-start gap-x-2">
           <Refresh />
           <div>
-            <span className="font-semibold">Simple exchanges</span>
-            <p className="max-w-sm">
-              Is the fit not quite right? No worries - we&apos;ll exchange your
-              product for a new one.
+            <span className="font-semibold text-neutral-200">🔄 Výmena tovaru</span>
+            <p className="max-w-sm text-neutral-400">
+              Nesedí vám veľkosť? Žiadny problém - vymeníme vám produkt za nový.
             </p>
           </div>
         </div>
         <div className="flex items-start gap-x-2">
           <Back />
           <div>
-            <span className="font-semibold">Easy returns</span>
-            <p className="max-w-sm">
-              Just return your product and we&apos;ll refund your money. No
-              questions asked – we&apos;ll do our best to make sure your return
-              is hassle-free.
+            <span className="font-semibold text-neutral-200">↩️ Jednoduché vrátenie</span>
+            <p className="max-w-sm text-neutral-400">
+              Neotvorený tovar môžete vrátiť do 14 dní bez udania dôvodu. Vrátenie je jednoduché a bezproblémové.
             </p>
           </div>
         </div>

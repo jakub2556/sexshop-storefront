@@ -19,7 +19,7 @@ const Review = ({ cart }: { cart: any }) => {
     (cart.payment_collection || paidByGiftcard)
 
   return (
-    <div className="bg-zinc-900">
+    <div className="">
       <div className="flex flex-row items-center justify-between mb-6">
         <Heading
           level="h2"
@@ -30,7 +30,7 @@ const Review = ({ cart }: { cart: any }) => {
             }
           )}
         >
-          Review
+          Kontrola objednávky
         </Heading>
       </div>
       {isOpen && previousStepsCompleted && (
@@ -38,10 +38,10 @@ const Review = ({ cart }: { cart: any }) => {
           <div className="flex items-start gap-x-1 w-full mb-6">
             <div className="w-full">
               <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                By clicking the Place Order button, you confirm that you have
-                read, understand and accept our Terms of Use, Terms of Sale and
-                Returns Policy and acknowledge that you have read Medusa
-                Store&apos;s Privacy Policy.
+                Kliknutím na tlačidlo Odoslať objednávku potvrdzujete, že ste
+                si prečítali a súhlasíte s našimi Podmienkami používania,
+                Podmienkami predaja a Zásadami vrátenia tovaru a beriete na
+                vedomie Zásady ochrany osobných údajov.
               </Text>
             </div>
           </div>

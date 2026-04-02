@@ -28,6 +28,7 @@ const nextConfig = {
     remotePatterns: [
       { protocol: "http", hostname: "localhost" },
       { protocol: "http", hostname: "173.249.39.158" },
+      { protocol: "https", hostname: "static.erotikamarket.hu" },
       { protocol: "https", hostname: "pub-260fe0e98e0241a3a4d293d4b93b5e00.r2.dev" },
       { protocol: "https", hostname: "medusa-public-images.s3.eu-west-1.amazonaws.com" },
       { protocol: "https", hostname: "medusa-server-testing.s3.amazonaws.com" },

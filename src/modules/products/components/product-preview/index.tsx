@@ -5,38 +5,22 @@ import LocalizedClientLink from "@modules/common/components/localized-client-lin
 import Thumbnail from "../thumbnail"
 import PreviewPrice from "./price"
 
-export default async function ProductPreview({
-  product,
-  isFeatured,
-  region,
-}: {
-  product: HttpTypes.StoreProduct
-  isFeatured?: boolean
-  region: HttpTypes.StoreRegion
-}) {
-  const { cheapestPrice } = getProductPrice({
-    product,
-  })
+export default async function ProductPreview({ product, isFeatured, region }: { product: HttpTypes.StoreProduct; isFeatured?: boolean; region: HttpTypes.StoreRegion }) {
+  const { cheapestPrice } = getProductPrice({ product })
 
   return (
     <LocalizedClientLink href={`/products/${product.handle}`} className="group">
-      <div data-testid="product-wrapper" className="dark-card">
-        <div className="relative overflow-hidden aspect-[3/4] bg-zinc-900">
+      <div data-testid="product-wrapper" className="dark-card relative">
+        <div className="relative overflow-hidden aspect-square" style={{ background: "var(--bg-elevated)" }}>
           <div className="product-card-img h-full w-full">
-            <Thumbnail
-              thumbnail={product.thumbnail}
-              images={product.images}
-              size="full"
-              isFeatured={isFeatured}
-            />
+            <Thumbnail thumbnail={product.thumbnail} images={product.images} size="full" isFeatured={isFeatured} />
           </div>
-          <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </div>
         <div className="p-4">
-          <Text className="text-zinc-300 text-sm font-medium group-hover:text-white transition-colors" data-testid="product-title">
+          <Text className="text-sm font-medium group-hover:text-rose-400 transition-colors line-clamp-2" style={{ color: "var(--text-primary)" }} data-testid="product-title">
             {product.title}
           </Text>
-          <div className="flex items-center gap-x-2 mt-1">
+          <div className="flex items-center gap-x-2 mt-2">
             {cheapestPrice && <PreviewPrice price={cheapestPrice} />}
           </div>
         </div>

@@ -5,7 +5,7 @@ import StoreTemplate from "@modules/store/templates"
 
 export const metadata: Metadata = {
   title: "Obchod",
-  description: "Prezrite si nasu kompletnu ponuku produktov pre dospelych.",
+  description: "Prezrite si našu kompletnú ponuku produktov pre dospelých.",
 }
 
 type Params = {
