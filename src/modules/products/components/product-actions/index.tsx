@@ -174,7 +174,7 @@ export default function ProductActions({
             !isValidVariant
           }
           variant="primary"
-          className="w-full h-10"
+          className="w-full h-10 !bg-rose-600 hover:!bg-rose-500 !text-white !rounded-xl !shadow-lg !shadow-rose-600/20"
           isLoading={isAdding}
           data-testid="add-product-button"
         >

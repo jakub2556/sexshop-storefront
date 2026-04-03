@@ -163,7 +163,7 @@ export default function AdvancedFilter({
         </div>
       </div>
 
-      {/* Price slider */}
+      {/* Price slider - dual thumb on one track */}
       <div className="mb-5">
         <button onClick={() => setPriceOpen(!priceOpen)} className="flex items-center justify-between w-full text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: "var(--text-secondary)" }}>
           Cena
@@ -172,25 +172,27 @@ export default function AdvancedFilter({
         {priceOpen && (
           <div className="px-1">
             <div className="flex items-center justify-between text-xs mb-3" style={{ color: "var(--text-secondary)" }}>
-              <span>{priceMin} €</span>
-              <span>{priceMax >= 500 ? "500+ €" : priceMax + " €"}</span>
+              <span className="font-medium" style={{ color: "var(--text-primary)" }}>{priceMin} €</span>
+              <span className="font-medium" style={{ color: "var(--text-primary)" }}>{priceMax >= 500 ? "500+ €" : priceMax + " €"}</span>
             </div>
-            {/* Min slider */}
-            <div className="relative mb-2">
+            {/* Dual range slider - one track, two thumbs */}
+            <div className="relative h-6 flex items-center">
+              {/* Track background */}
+              <div className="absolute left-0 right-0 h-1.5 rounded-full" style={{ background: "var(--border)" }} />
+              {/* Active range */}
+              <div className="absolute h-1.5 rounded-full bg-rose-500" style={{ left: `${(priceMin / 500) * 100}%`, right: `${100 - (priceMax / 500) * 100}%` }} />
+              {/* Min thumb */}
               <input
                 type="range" min={0} max={500} step={5} value={priceMin}
-                onChange={(e) => handlePriceChange("min", Math.min(Number(e.target.value), priceMax - 5))}
-                className="w-full h-1.5 rounded-full appearance-none cursor-pointer"
-                style={{ background: `linear-gradient(to right, var(--border) 0%, var(--border) ${priceMin / 5}%, #E11D48 ${priceMin / 5}%, #E11D48 ${priceMax / 5}%, var(--border) ${priceMax / 5}%, var(--border) 100%)` }}
+                onChange={(e) => handlePriceChange("min", Math.min(Number(e.target.value), priceMax - 10))}
+                className="absolute w-full h-1.5 appearance-none bg-transparent pointer-events-none [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-rose-500 [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-[var(--bg-primary)] [&::-webkit-slider-thumb]:shadow-[0_0_0_3px_rgba(225,29,72,0.2)] [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:relative [&::-webkit-slider-thumb]:z-10 [&::-moz-range-thumb]:pointer-events-auto [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-rose-500 [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-[var(--bg-primary)] [&::-moz-range-thumb]:cursor-pointer"
+                style={{ zIndex: priceMin > 450 ? 20 : 10 }}
               />
-            </div>
-            {/* Max slider */}
-            <div className="relative">
+              {/* Max thumb */}
               <input
                 type="range" min={0} max={500} step={5} value={priceMax}
-                onChange={(e) => handlePriceChange("max", Math.max(Number(e.target.value), priceMin + 5))}
-                className="w-full h-1.5 rounded-full appearance-none cursor-pointer"
-                style={{ background: "transparent" }}
+                onChange={(e) => handlePriceChange("max", Math.max(Number(e.target.value), priceMin + 10))}
+                className="absolute w-full h-1.5 appearance-none bg-transparent pointer-events-none [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-rose-500 [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-[var(--bg-primary)] [&::-webkit-slider-thumb]:shadow-[0_0_0_3px_rgba(225,29,72,0.2)] [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:relative [&::-webkit-slider-thumb]:z-20 [&::-moz-range-thumb]:pointer-events-auto [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-rose-500 [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-[var(--bg-primary)] [&::-moz-range-thumb]:cursor-pointer"
               />
             </div>
             {/* Quick price buttons */}
